@@ -1,10 +1,9 @@
 export const defaultTheme = {
   white: '#fff',
-  black: '#141c33',
-  grey: '#eff5fa',
+  gray: '#E2E0E5',
   
-  'blue-600': '#2f456f',
-  'blue-500': '#5374ac',
-  'blue-300': '#8bafd0',
+  'purple-500': '#443C57',
+  'purple-700': '#2D2640',
+  'purple-900': '#1A1625',
 
-} as const;
+} as const; 

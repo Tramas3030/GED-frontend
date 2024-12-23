@@ -14,8 +14,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${props => props.theme.black};
-    color: ${props => props.theme.white};
+    background-color: ${props => props.theme["purple-700"]};
+    color: ${props => props.theme.gray};
 
     font-family: Roboto, sans-serif;
     font-size: 1.6rem;
