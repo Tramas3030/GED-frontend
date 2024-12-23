@@ -1,6 +1,6 @@
 import { Profile } from "../Profile";
 import { SmallButton } from "../SmallButton";
-import { HeaderContainer, HeaderActions } from "./styles";
+import { HeaderContainer, HeaderActions, HeaderText } from "./styles";
 
 interface HeaderProps {
   showJoinButton: boolean;
@@ -11,11 +11,11 @@ interface HeaderProps {
 export function Header({ showJoinButton, showCreateButton, showProfile }: HeaderProps) {
   return(
     <HeaderContainer>
-      <h1>GED System</h1>
+      <HeaderText>GED System</HeaderText>
 
       <HeaderActions>
-        {showJoinButton && <SmallButton />}
-        {showCreateButton && <SmallButton />}
+        {showCreateButton && <SmallButton text="Create"/>}
+        {showJoinButton && <SmallButton text="Join"/>}
         {showProfile && <Profile />}
       </HeaderActions>
     </HeaderContainer>

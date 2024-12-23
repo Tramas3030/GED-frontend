@@ -1,5 +1,12 @@
-export function SmallButton() {
+import { ButtonContainer } from "./styles";
+
+
+interface SmallButtonProps {
+  text: string;
+}
+
+export function SmallButton({ text }: SmallButtonProps) {
   return(
-    <h1>Oii</h1>
+    <ButtonContainer variant={text.toLowerCase() as 'create' | 'join'}>{text}</ButtonContainer>
   )
 }

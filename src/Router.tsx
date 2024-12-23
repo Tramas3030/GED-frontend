@@ -4,6 +4,7 @@ import { Register } from './pages/Register';
 import { Home } from './pages/Home';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { Create } from './pages/Create';
+import { Join } from './pages/Join';
 
 export function Router() {
   return(
@@ -11,6 +12,7 @@ export function Router() {
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/" element={<Home />}/>
         <Route path="/create" element={<Create />}/>
+        <Route path="/join" element={<Join />}/>
       </Route>
       
       <Route path="/register" element={<Register />}/>
