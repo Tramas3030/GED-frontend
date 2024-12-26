@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { Create } from './pages/Create';
 import { Join } from './pages/Join';
+import { RegisterAndLoginDefaultLayout } from './layouts/RegisterAndLoginDefaultLayout';
 
 export function Router() {
   return(
@@ -14,9 +15,12 @@ export function Router() {
         <Route path="/create" element={<Create />}/>
         <Route path="/join" element={<Join />}/>
       </Route>
+
+      <Route path="/" element={<RegisterAndLoginDefaultLayout />}>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/login" element={<Login />}/>
+      </Route>
       
-      <Route path="/register" element={<Register />}/>
-      <Route path="/login" element={<Login />}/>
     </Routes>
   )
 }
