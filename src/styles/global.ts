@@ -18,6 +18,18 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: 0 0 0 2px ${props => props.theme.gray};
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   body {
     background-color: ${props => props.theme["purple-700"]};
     color: ${props => props.theme.gray};
