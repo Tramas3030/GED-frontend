@@ -13,6 +13,11 @@ export const GlobalStyle = createGlobalStyle`
 	  font-size: 62.5%;
   }
 
+  :focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px ${props => props.theme.gray};
+  }
+
   body {
     background-color: ${props => props.theme["purple-700"]};
     color: ${props => props.theme.gray};

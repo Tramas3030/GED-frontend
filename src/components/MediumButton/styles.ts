@@ -13,7 +13,7 @@ export const ButtonContainer = styled.button`
   text-align: center;
   align-self: center;
 
-  font-size: 1.6rem;
+  font-size: 2.4rem;
 
   border-radius: 6px;
   cursor: pointer;
@@ -22,4 +22,5 @@ export const ButtonContainer = styled.button`
     transition: filter 0.2s;
     filter: brightness(1.3);
   }
+
 `;
