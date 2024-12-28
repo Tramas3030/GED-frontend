@@ -21,6 +21,22 @@ export const Container = styled.div`
     font-size: 3.2rem;
     color: ${props => props.theme.gray};    
   }
+
+  span {
+    margin-top: .6rem;
+    font-size: 1.6rem;
+    text-align: center;
+
+    a {
+      &:active {
+        color: inherit;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 `;
 
 export const FormContainer = styled.form`

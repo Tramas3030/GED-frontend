@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
@@ -54,6 +55,8 @@ export function Login() {
 
         <MediumButton text="Login"/>
       </FormContainer>
+
+      <span>Don't have an account yet? <Link to="/register">Sign up</Link> </span>
     </Container>
   )
 }
