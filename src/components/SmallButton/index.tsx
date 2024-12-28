@@ -1,6 +1,5 @@
 import { ButtonContainer } from "./styles";
 
-
 interface SmallButtonProps {
   text: string;
 }

@@ -30,24 +30,4 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
-  input {
-    width: 100%;
-    height: 7.2rem;
-    
-    padding-left: 1.6rem;
-
-    border: 0;
-    border-radius: 6px;
-
-    font-size: 1.6rem;
-
-    background-color: ${props => props.theme["purple-500"]};
-    color: ${props => props.theme.white};
-
-    &::placeholder {
-      font-size: 1.6rem;
-      color: ${props => props.theme.white};
-    }
-  }
 `;

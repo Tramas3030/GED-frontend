@@ -2,8 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
+import { User, LockSimple } from "phosphor-react";
+
 import { MediumButton } from "../../components/MediumButton"
 import { Container, FormContainer } from "./styles"
+import { FormInput } from "../../components/FormInput";
 
 const formValidationSchema = zod.object({
   username: zod.string().min(3, "Username must be at least 3 characters long"),
@@ -31,11 +34,23 @@ export function Register() {
       <h1>GED System</h1>
 
       <FormContainer onSubmit={handleSubmit(onSubmit)} action="">
-        <label htmlFor="username" className="sr-only">Username</label>
-        <input type="text" id="username" placeholder="Username" {...register('username')}/>
-        
-        <label htmlFor="password" className="sr-only">Password</label>
-        <input type="password" id="password" placeholder="Password" {...register('password')}/>
+        <FormInput 
+          labelText="Username"
+          inputText="Enter your username"
+          icon={User}
+          type="text"
+          id="username"
+          {...register('username')}
+        />
+
+        <FormInput 
+          labelText="Password"
+          inputText="Enter your password"
+          icon={LockSimple}
+          type="password"
+          id="password"
+          {...register('password')}
+        />
 
         <MediumButton text="Register"/>
       </FormContainer>
