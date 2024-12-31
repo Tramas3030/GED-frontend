@@ -39,6 +39,14 @@ export const GroupsTable = styled.table`
   border-collapse: separate;
   border-spacing: 0 2.4rem;
 
+  tr {
+    cursor: pointer;
+  }
+
+  tr:hover {
+    filter: brightness(1.4);
+  }
+
   td {
     padding: 2.4rem 3.2rem;
     background-color: ${props => props.theme["purple-900"]};
