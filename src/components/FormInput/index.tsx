@@ -12,7 +12,7 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ({ labelText, inputText, icon: Icon, ...props }, ref) => {
     return (
-      <FormInputContainer>
+      <FormInputContainer hasIcon={!!Icon}>
         <Label htmlFor={props.id}>{labelText}</Label>
         
         <div className="input-wrapper">
@@ -23,6 +23,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             type={props.type}
             id={props.id}
             placeholder={inputText}
+            hasIcon={!!Icon}
             {...props}
           />
         </div>

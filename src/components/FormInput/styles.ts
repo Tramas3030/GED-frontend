@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const FormInputContainer = styled.div`
+interface StyledProps {
+  hasIcon: boolean;
+};
+
+export const FormInputContainer = styled.div<StyledProps>`
   width: 100%;
   height: auto;
 
@@ -10,23 +14,26 @@ export const FormInputContainer = styled.div`
   gap: .6rem;
 
   .input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    svg {
-      position: absolute;
-      left: 1.6rem;
-      color: ${props => props.theme.white};
-    }
+    ${props => props.hasIcon && css`
+      position: relative;
+      display: flex;
+      align-items: center;
+  
+      svg {
+        position: absolute;
+        left: 1.6rem;
+        color: ${props => props.theme.white};
+      }
+    `}
+    
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<StyledProps>`
   width: 100%;
   height: 7.2rem;
   
-  padding-left: 4.8rem;
+  padding-left: ${props => props.hasIcon ? '4.8rem' : '1.6rem'};
 
   border: 0;
   border-radius: 6px;
