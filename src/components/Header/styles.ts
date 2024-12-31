@@ -16,6 +16,8 @@ export const HeaderContainer = styled.div`
 export const HeaderText = styled.h1`
   font-size: 3.2rem;
   color: ${props => props.theme.gray};
+
+  cursor: pointer;
 `;
 
 export const HeaderActions = styled.div`
