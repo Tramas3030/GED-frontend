@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
 import { Tag } from "./components/Tag";
-import { GroupsTable, LayoutContainer } from "./styles";
+import { ButtonContainer, GroupsTable, LayoutContainer, SearchFormAndButtonContainer } from "./styles";
 
 import { Trash } from "phosphor-react";
+import { SearchForm } from "./components/SearchForm";
 
 export function Group() {
   const navigate = useNavigate();
@@ -19,6 +20,12 @@ export function Group() {
 
   return(
     <LayoutContainer>
+      <SearchFormAndButtonContainer>
+        <SearchForm />
+
+        <ButtonContainer>Upload document</ButtonContainer>
+      </SearchFormAndButtonContainer>
+
         <GroupsTable>
           <tbody onClick={handleTableGroupClick}>
             <tr>

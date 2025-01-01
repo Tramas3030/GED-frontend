@@ -7,6 +7,38 @@ export const LayoutContainer = styled.div`
   padding: 3.2rem;
 
   display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
+export const SearchFormAndButtonContainer = styled.div`
+  width: 100%;
+  
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+`;
+
+export const ButtonContainer = styled.button`
+  height: 6.0rem;
+
+  padding: 1.6rem 3.2rem;
+
+  font-size: 1.6rem;
+
+  background-color: ${props => props.theme["purple-500"]};
+  color: ${props => props.theme.gray};
+
+  border: 0;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  &:hover {
+    transition: filter 0.2s;
+    filter: brightness(1.3);
+  }
 `;
 
 export const GroupsTable = styled.table`
