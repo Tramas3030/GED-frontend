@@ -1,5 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Content, DialogButtonsContainer, Overlay } from "./styles";
+import { CloseButton, Content, DialogButtonsContainer, Overlay } from "./styles";
+import { X } from "phosphor-react";
 
 export function UploadDocumentModal() {
   return(
@@ -7,6 +8,10 @@ export function UploadDocumentModal() {
       <Overlay />
 
       <Content>
+        <CloseButton>
+          <X size={16}/>
+        </CloseButton>
+
         <Dialog.Description>
           <p> Are you sure you want to <span>delete</span> this document? 
           This action is <span>permanent</span> and can't be <span>undone</span> </p>
