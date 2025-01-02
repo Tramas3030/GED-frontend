@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { CloseButton, Content, DialogButtonsContainer, Overlay } from "./styles";
+import { CancelButton, CloseButton, Content, DeleteButton, DialogButtonsContainer, Overlay } from "./styles";
 import { X } from "phosphor-react";
 
 export function UploadDocumentModal() {
@@ -18,8 +18,8 @@ export function UploadDocumentModal() {
         </Dialog.Description>
 
         <DialogButtonsContainer>
-          <button>Cancel</button>
-          <button>Delete</button>
+          <CancelButton>Cancel</CancelButton>
+          <DeleteButton>Delete</DeleteButton>
         </DialogButtonsContainer>
       </Content>
     </Dialog.Portal>

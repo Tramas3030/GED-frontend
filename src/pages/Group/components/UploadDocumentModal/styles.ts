@@ -37,6 +37,12 @@ export const Content = styled(Dialog.Content)`
   }
 `;
 
+export const DialogButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+`;
+
 export const CloseButton = styled(Dialog.Close)`
   position: absolute;
   background: transparent;
@@ -50,43 +56,44 @@ export const CloseButton = styled(Dialog.Close)`
   color: ${props => props.theme.gray};
 `;
 
-export const DialogButtonsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1.2rem;
+export const CancelButton = styled(Dialog.Close)`
+  font-size: 1.6rem;
 
-  button {
-    font-size: 1.6rem;
+  padding: 1.6rem 3.2rem;
 
-    padding: 1.6rem 3.2rem;
-    
-    border: 0;
-    border-radius: 6px;
-    
-    cursor: pointer;
+  border: 0;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  background-color: ${props => props.theme["purple-700"]};   
+  color: ${props => props.theme.gray};
+
+  border: 1px solid #443C57;
+
+  &:hover {
+    transition: filter 0.2s;
+    filter: brightness(1.3);
   }
+`;
 
-  button:first-child {
-    background-color: ${props => props.theme["purple-700"]};   
-    color: ${props => props.theme.gray};
+export const DeleteButton = styled.button`
+  font-size: 1.6rem;
 
-    border: 1px solid #443C57;
+  padding: 1.6rem 3.2rem;
 
-    &:hover {
-      transition: filter 0.2s;
-      filter: brightness(1.3);
-    }
-  }
+  border: 0;
+  border-radius: 6px;
 
-  button:last-child {
-    color: ${props => props.theme.white};
-    background: linear-gradient(to right, rgb(230, 40, 40) 50%, rgb(193, 28, 28) 50%);
-    background-size: 200% 100%;
-    background-position: 0;
-    transition: background-position 0.2s ease-out;
+  cursor: pointer;
 
-    &:hover {
-      background-position: -100% 0;
-    }
+  color: ${props => props.theme.white};
+  background: linear-gradient(to right, rgb(230, 40, 40) 50%, rgb(193, 28, 28) 50%);
+  background-size: 200% 100%;
+  background-position: 0;
+  transition: background-position 0.2s ease-out;
+
+  &:hover {
+    background-position: -100% 0;
   }
 `;
