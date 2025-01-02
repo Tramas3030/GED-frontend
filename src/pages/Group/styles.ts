@@ -20,7 +20,7 @@ export const SearchFormAndButtonContainer = styled.div`
   align-items: center;
 `;
 
-export const ButtonContainer = styled.button`
+export const UploadDocumentButtonContainer = styled.button`
   height: 6.0rem;
 
   padding: 1.6rem 3.2rem;

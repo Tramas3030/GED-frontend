@@ -1,10 +1,17 @@
 import { useNavigate } from "react-router-dom";
-
-import { Tag } from "./components/Tag";
-import { ButtonContainer, GroupsTable, LayoutContainer, SearchFormAndButtonContainer } from "./styles";
-
 import { Trash } from "phosphor-react";
+import * as Dialog from "@radix-ui/react-dialog";
+
+import { 
+  GroupsTable, 
+  LayoutContainer, 
+  SearchFormAndButtonContainer, 
+  UploadDocumentButtonContainer 
+} from "./styles";
+
 import { SearchForm } from "./components/SearchForm";
+import { Tag } from "./components/Tag";
+import { UploadDocumentModal } from "./components/UploadDocumentModal";
 
 export function Group() {
   const navigate = useNavigate();
@@ -15,7 +22,6 @@ export function Group() {
 
   function handleTrashClick(event: React.MouseEvent) {
     event?.stopPropagation();
-    alert("Vamos criar o modal agora");
   }
 
   return(
@@ -23,7 +29,7 @@ export function Group() {
       <SearchFormAndButtonContainer>
         <SearchForm />
 
-        <ButtonContainer>Upload document</ButtonContainer>
+        <UploadDocumentButtonContainer>Upload document</UploadDocumentButtonContainer>
       </SearchFormAndButtonContainer>
 
         <GroupsTable>
@@ -34,8 +40,14 @@ export function Group() {
               <td>
                 <Tag text="Category"/>
               </td>
-              <td>
-                <Trash size={24} onClick={handleTrashClick}/>
+              <td onClick={handleTrashClick}>
+                <Dialog.Root>
+                  <Dialog.Trigger asChild>
+                    <Trash size={24}/>
+                  </Dialog.Trigger>
+
+                  <UploadDocumentModal />
+                </Dialog.Root>
               </td>
             </tr>
 
@@ -45,8 +57,14 @@ export function Group() {
               <td>
                 <Tag text="Category"/>
               </td>
-              <td>
-                <Trash size={24} onClick={handleTrashClick}/>
+              <td onClick={handleTrashClick}>
+                <Dialog.Root>
+                    <Dialog.Trigger asChild>
+                      <Trash size={24}/>
+                    </Dialog.Trigger>
+
+                    <UploadDocumentModal />
+                  </Dialog.Root>
               </td>
             </tr>
 
@@ -56,8 +74,14 @@ export function Group() {
               <td>
                 <Tag text="Category"/>
               </td>
-              <td>
-                <Trash size={24} onClick={handleTrashClick}/>
+              <td onClick={handleTrashClick}>
+                <Dialog.Root>
+                    <Dialog.Trigger asChild>
+                      <Trash size={24}/>
+                    </Dialog.Trigger>
+
+                    <UploadDocumentModal />
+                  </Dialog.Root>
               </td>
             </tr>
 
@@ -67,8 +91,14 @@ export function Group() {
               <td>
                 <Tag text="Category"/>
               </td>
-              <td>
-                <Trash size={24} onClick={handleTrashClick}/>
+              <td onClick={handleTrashClick}>
+                <Dialog.Root>
+                  <Dialog.Trigger asChild>
+                    <Trash size={24}/>
+                  </Dialog.Trigger>
+
+                  <UploadDocumentModal />
+                </Dialog.Root>
               </td>           
             </tr>
           </tbody>
