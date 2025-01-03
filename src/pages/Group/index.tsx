@@ -20,6 +20,10 @@ export function Group() {
     navigate("/document/details");
   }
 
+  function handleUploadDocumentButtonClick() {
+    navigate("/document/upload");
+  }
+
   function handleTrashClick(event: React.MouseEvent) {
     event?.stopPropagation();
   }
@@ -29,7 +33,7 @@ export function Group() {
       <SearchFormAndButtonContainer>
         <SearchForm />
 
-        <UploadDocumentButtonContainer>Upload document</UploadDocumentButtonContainer>
+        <UploadDocumentButtonContainer onClick={handleUploadDocumentButtonClick}>Upload document</UploadDocumentButtonContainer>
       </SearchFormAndButtonContainer>
 
         <GroupsTable>
