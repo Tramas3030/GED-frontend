@@ -9,6 +9,7 @@ import { Join } from './pages/Join';
 import { Group } from './pages/Group';
 import { DocumentDetails } from './pages/DocumentDetails';
 import { UploadDocument } from './pages/UploadDocument';
+import { Admin } from './pages/Admin';
 
 export function Router() {
   return(
@@ -18,6 +19,7 @@ export function Router() {
         <Route path="/create" element={<Create />}/>
         <Route path="/join" element={<Join />}/>
         <Route path="/group" element={<Group />}/>
+        <Route path="/group/admin" element={<Admin />}/>
         <Route path="/document/details" element={<DocumentDetails />}/>
         <Route path="/document/upload" element={<UploadDocument />}/>
       </Route>
