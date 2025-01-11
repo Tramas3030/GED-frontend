@@ -38,7 +38,7 @@ export const ButtonsContainer = styled.button`
   cursor: pointer;
 
   &:hover {
-    transition: filter 0.2s;
-    filter: brightness(1.3);
+    transition: opacity 0.2s;
+    opacity: 0.7;
   }
 `;

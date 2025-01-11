@@ -49,3 +49,22 @@ export const RequestsContainer = styled.main`
   width: 100%;
   height: auto;
 `;
+
+export const ZeroPendingRequestsContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1.2rem;
+
+  padding: 3.6rem 0;
+
+  background-color: ${props => props.theme.gray};
+  color: ${props => props.theme["purple-900"]};
+
+  strong {
+    font-size: 2.4rem;
+  }
+`;

@@ -1,6 +1,6 @@
 import { Users } from "phosphor-react";
 
-import { LayoutContainer, PendingRequestsContainer, PendingRequestsCounterContainer, RequestsContainer } from "./styles";
+import { LayoutContainer, PendingRequestsContainer, PendingRequestsCounterContainer, RequestsContainer, ZeroPendingRequestsContainer } from "./styles";
 import { RequestCard } from "./components/RequestCard";
 
 const requests = [
@@ -18,13 +18,19 @@ export function Admin() {
           <span className="pendingRequests">Pending requests</span>
         </div>
         
-        <PendingRequestsCounterContainer>3 pendentes</PendingRequestsCounterContainer>
+        <PendingRequestsCounterContainer>3 pending requests</PendingRequestsCounterContainer>
       </PendingRequestsContainer>
       
       <RequestsContainer>
         {requests.map((request, index) => (
           <RequestCard key={request.id} hasBorder={index !== requests.length - 1} />
         ))}
+
+        <ZeroPendingRequestsContainer>
+          <Users size={48}/>
+          <strong>No pending requests</strong>
+          <p>When someone requests access to your company, it will appear here.</p>
+        </ZeroPendingRequestsContainer>
       </RequestsContainer>
     </LayoutContainer>
   )
