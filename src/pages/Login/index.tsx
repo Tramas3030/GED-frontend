@@ -8,6 +8,7 @@ import { User, LockSimple } from "phosphor-react";
 import { MediumButton } from "../../components/MediumButton"
 import { Container, FormContainer } from "./styles"
 import { FormInput } from "../../components/FormInput";
+import { apiGateway } from "../../lib/axios";
 
 const formValidationSchema = zod.object({
   username: zod.string().min(3, "Username must be at least 3 characters long"),
@@ -25,7 +26,20 @@ export function Login() {
     }
   });
 
-  function onSubmit(data: formData) {
+  async function onSubmit(data: formData) {
+    
+    try {
+      const response = await apiGateway.post('/auth/login', {
+        username: data.username,
+        password: data.password
+      });
+
+      console.log('Response:');
+      console.log(response.data);
+    } catch (error) {
+      console.log('Error during login: ', error);
+    }
+    
     console.log(data);
     reset();
   }

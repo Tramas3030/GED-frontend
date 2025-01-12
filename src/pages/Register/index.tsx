@@ -1,3 +1,5 @@
+import { apiGateway } from "../../lib/axios";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
@@ -24,9 +26,20 @@ export function Register() {
     }
   });
 
-  function onSubmit(data: formData) {
-    console.log(data);
-    reset();
+  async function onSubmit(data: formData) {
+    try {
+      const response = await apiGateway.post('/auth/register', {
+        username: data.username,
+        password: data.password
+      });
+
+      console.log('Response:');
+      console.log(response.data);
+
+      reset();
+    } catch(error) {
+      console.log('Error during registration: ', error);
+    }
   }
 
   return(
