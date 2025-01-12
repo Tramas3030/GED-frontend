@@ -11,19 +11,60 @@ import { DocumentDetails } from './pages/DocumentDetails';
 import { UploadDocument } from './pages/UploadDocument';
 import { Admin } from './pages/Admin';
 import { AdminRoles } from './pages/AdminRoles';
+import { PrivateRoute } from './components/PrivateRoute';
 
 export function Router() {
   return(
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
-        <Route path="/" element={<Home />}/>
-        <Route path="/create" element={<Create />}/>
-        <Route path="/join" element={<Join />}/>
-        <Route path="/group" element={<Group />}/>
-        <Route path="/group/admin" element={<Admin />}/>
-        <Route path="/group/admin/roles" element={<AdminRoles />}/>
-        <Route path="/document/details" element={<DocumentDetails />}/>
-        <Route path="/document/upload" element={<UploadDocument />}/>
+        <Route path="/" element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+          }/>
+
+        <Route path="/create" element={
+          <PrivateRoute>
+            <Create />
+          </PrivateRoute> 
+          }/>
+        
+        <Route path="/join" element={
+          <PrivateRoute>
+            <Join />
+          </PrivateRoute>
+          }/>
+
+
+        <Route path="/group" element={
+          <PrivateRoute>
+            <Group />
+          </PrivateRoute>
+          }/>
+        
+        <Route path="/group/admin" element={
+          <PrivateRoute>
+            <Admin />
+          </PrivateRoute>          
+          }/>
+
+        <Route path="/group/admin/roles" element={
+          <PrivateRoute>
+            <AdminRoles />
+          </PrivateRoute>          
+          }/>
+
+        <Route path="/document/details" element={
+          <PrivateRoute>
+            <DocumentDetails />
+          </PrivateRoute>          
+          }/>
+
+        <Route path="/document/upload" element={
+          <PrivateRoute>
+            <UploadDocument />
+          </PrivateRoute>          
+          }/>
       </Route>
 
       <Route path="/register" element={<Register />}/>

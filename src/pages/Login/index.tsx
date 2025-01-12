@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 
@@ -9,6 +9,7 @@ import { MediumButton } from "../../components/MediumButton"
 import { Container, FormContainer } from "./styles"
 import { FormInput } from "../../components/FormInput";
 import { apiGateway } from "../../lib/axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 const formValidationSchema = zod.object({
   username: zod.string().min(3, "Username must be at least 3 characters long"),
@@ -18,6 +19,9 @@ const formValidationSchema = zod.object({
 type formData = zod.infer<typeof formValidationSchema>;
 
 export function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const { register, handleSubmit, reset } = useForm<formData>({
     resolver: zodResolver(formValidationSchema),
     defaultValues: {
@@ -27,20 +31,19 @@ export function Login() {
   });
 
   async function onSubmit(data: formData) {
-    
     try {
       const response = await apiGateway.post('/auth/login', {
         username: data.username,
         password: data.password
       });
 
-      console.log('Response:');
+      login(response.data);
       console.log(response.data);
+      navigate("/");
     } catch (error) {
       console.log('Error during login: ', error);
     }
-    
-    console.log(data);
+  
     reset();
   }
 
