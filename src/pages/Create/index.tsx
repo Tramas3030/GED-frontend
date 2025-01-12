@@ -5,6 +5,9 @@ import * as zod from "zod";
 import { FormInput } from "../../components/FormInput";
 import { MediumButton } from "../../components/MediumButton";
 import { FormContainer } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { apiGateway } from "../../lib/axios";
 
 const formValidationSchema = zod.object({
   companyName: zod.string().min(3, "Username must be at least 3 characters long"),
@@ -13,17 +16,37 @@ const formValidationSchema = zod.object({
 type formData = zod.infer<typeof formValidationSchema>;
 
 export function Create() {
+  const navigate = useNavigate();
+  const { token } = useAuth();
   const { register, handleSubmit, reset } = useForm<formData>({
       resolver: zodResolver(formValidationSchema),
       defaultValues: {
         companyName: "",
       }
     });
-  
-    function onSubmit(data: formData) {
-      console.log(data);
+
+  async function onSubmit(data: formData) {
+    try {
+      const response = await apiGateway.post("/v1/api/company", {
+        name: data.companyName,
+        isVisible: true,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }
+    );
+
+      console.log("Company created successfully");
+      console.log(response.data);      
+      
       reset();
+      navigate("/");
+    } catch (error) {
+      console.log("Error during create company: ", error);
     }
+  }
   
   return(
     <FormContainer onSubmit={handleSubmit(onSubmit)} action="">

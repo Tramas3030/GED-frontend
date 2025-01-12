@@ -32,7 +32,7 @@ export function Login() {
 
   async function onSubmit(data: formData) {
     try {
-      const response = await apiGateway.post('/auth/login', {
+      const response = await apiGateway.post("/auth/login", {
         username: data.username,
         password: data.password
       });
@@ -41,7 +41,7 @@ export function Login() {
       console.log(response.data);
       navigate("/");
     } catch (error) {
-      console.log('Error during login: ', error);
+      console.log("Error during login: ", error);
     }
   
     reset();

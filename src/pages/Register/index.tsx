@@ -28,17 +28,17 @@ export function Register() {
 
   async function onSubmit(data: formData) {
     try {
-      const response = await apiGateway.post('/auth/register', {
+      const response = await apiGateway.post("/auth/register", {
         username: data.username,
         password: data.password
       });
 
-      console.log('Response:');
+      console.log("Response:");
       console.log(response.data);
 
       reset();
     } catch(error) {
-      console.log('Error during registration: ', error);
+      console.log("Error during registration: ", error);
     }
   }
 
