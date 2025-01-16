@@ -42,7 +42,7 @@ export function Home() {
   }, [token]);
 
   function handleGroupClick(companyId: string) {
-    navigate(`/group/${companyId}`);
+    navigate("/group", { state: {companyId} });
   }
 
   return(
@@ -54,9 +54,12 @@ export function Home() {
         </EmptyHomeContainer>
       ) : (
         <GroupsTable>
-          <tbody onClick={(e) => handleGroupClick(e.currentTarget.id)}>
+          <tbody>
             {companies.map((company) => (
-              <tr key={company.id}>
+              <tr 
+                key={company.id}
+                onClick={() => handleGroupClick(company.id)}
+              >
                 <td>{company.name}</td>
               </tr>
             ))}

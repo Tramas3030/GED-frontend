@@ -18,9 +18,24 @@ export const SearchFormAndButtonContainer = styled.div`
   justify-content: space-between;
 
   align-items: center;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
-export const UploadDocumentButtonContainer = styled.button`
+export const ButtonsGroupContainer = styled.div`
+  display: flex;
+  gap: 1.2rem;
+
+  @media (max-width: 1200px) {
+    justify-content: flex-start;
+    margin-top: 2.4rem;
+  }
+`;
+
+const BaseButton = styled.button`
   height: 6.0rem;
 
   padding: 1.6rem 3.2rem;
@@ -40,6 +55,10 @@ export const UploadDocumentButtonContainer = styled.button`
     filter: brightness(1.3);
   }
 `;
+
+export const UploadDocumentButtonContainer = styled(BaseButton)``;
+export const SeeMembersRequestsButtonContainer = styled(BaseButton)``;
+export const HandleMembersPermissionsButtonContainer = styled(BaseButton)``;
 
 export const GroupsTable = styled.table`
   width: 100%;
