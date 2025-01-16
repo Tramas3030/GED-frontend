@@ -3,6 +3,7 @@ import { EmptyHomeContainer, LayoutContainer, GroupsTable} from "./styles";
 import { apiGateway } from "../../lib/axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 interface Company {
   id: string;
@@ -17,6 +18,7 @@ interface TokenPayload {
 export function Home() {
   const { token } = useAuth();
   const [companies, setCompanies] = useState<Company[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCompanies = async () => {
@@ -39,6 +41,10 @@ export function Home() {
     getCompanies();
   }, [token]);
 
+  function handleGroupClick(companyId: string) {
+    navigate(`/group/${companyId}`);
+  }
+
   return(
     <LayoutContainer>
       {companies.length === 0 ? (
@@ -48,7 +54,7 @@ export function Home() {
         </EmptyHomeContainer>
       ) : (
         <GroupsTable>
-          <tbody>
+          <tbody onClick={(e) => handleGroupClick(e.currentTarget.id)}>
             {companies.map((company) => (
               <tr key={company.id}>
                 <td>{company.name}</td>

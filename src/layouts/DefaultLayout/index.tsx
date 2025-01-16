@@ -9,8 +9,8 @@ interface Routes {
 };
 
 const headerRoutes: Routes = {
-  joinButton: ['/', '/create'],
-  createButton: ['/', '/join'],
+  joinButton: ['/home', '/create'],
+  createButton: ['/home', '/join'],
   profile: ['/group', '/group/admin', '/group/admin/roles', '/document/details', '/document/upload']
 };
 

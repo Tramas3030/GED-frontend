@@ -14,7 +14,7 @@ export function Header({ showJoinButton, showCreateButton, showProfile }: Header
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate("/");
+    navigate("/home");
   }
   
   return(

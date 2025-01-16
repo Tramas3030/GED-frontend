@@ -16,8 +16,11 @@ import { PrivateRoute } from './components/PrivateRoute';
 export function Router() {
   return(
     <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/register" element={<Register />}/>
+      
       <Route path="/" element={<DefaultLayout />}>
-        <Route path="/" element={
+        <Route path="/home" element={
           <PrivateRoute>
             <Home />
           </PrivateRoute>
@@ -67,8 +70,6 @@ export function Router() {
           }/>
       </Route>
 
-      <Route path="/register" element={<Register />}/>
-      <Route path="/login" element={<Login />}/>
     </Routes>
   )
 }

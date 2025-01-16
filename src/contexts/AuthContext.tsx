@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface AuthContextProps {
@@ -20,10 +20,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return localStorage.getItem("@GEDSystem:token");
   });
 
+  useEffect(() => {
+    const handleTabClose = () => {
+      localStorage.removeItem("@GEDSystem:token");
+    }
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    }
+  }, []);
+
   const login = (token: string) => {
     localStorage.setItem("@GEDSystem:token", token);
     setToken(token);
-    navigate("/");
+    navigate("/home");
   };
 
   const logout = () => {

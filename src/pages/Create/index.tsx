@@ -42,7 +42,7 @@ export function Create() {
       console.log(response.data);      
       
       reset();
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.log("Error during create company: ", error);
     }

@@ -9,7 +9,7 @@ export function PrivateRoute({ children }: PrivateRouteProps) {
   const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return <>{children}</>;
