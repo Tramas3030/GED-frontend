@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Info, Trash } from "phosphor-react";
+import { Trash } from "phosphor-react";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -49,7 +49,11 @@ export function Group() {
   useEffect(() => {
     const getUserPermissions = async () => {
       try {
-        const response = await apiGateway.get<ApiResponse>(`/v1/api/company/${companyId}`);
+        const response = await apiGateway.get<ApiResponse>(`/v1/api/company/${companyId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const currentMember = response.data.members.find((member) => member.username === userEmail);
 
@@ -78,7 +82,7 @@ export function Group() {
   }
 
   function handleSeeMembersRequestsButtonClick() {
-    navigate("/group/admin");
+    navigate("/group/admin", { state: { companyId } });
   }
 
   function handleMembersPermissionsButtonClick() {
