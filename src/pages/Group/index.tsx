@@ -86,7 +86,7 @@ export function Group() {
   }
 
   function handleMembersPermissionsButtonClick() {
-    navigate("/group/admin/roles");
+    navigate("/group/admin/roles" , { state: { companyId } });
   }
  
   function handleTrashClick(event: React.MouseEvent) {

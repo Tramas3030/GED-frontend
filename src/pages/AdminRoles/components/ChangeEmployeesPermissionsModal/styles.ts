@@ -37,10 +37,50 @@ export const Content = styled(Dialog.Content)`
   }
 `;
 
+export const PermissionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  .CheckboxRoot {
+    background-color: ${props => props.theme.white};
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+  }
+
+  .CheckboxRoot:focus {
+    box-shadow: 0 0 0 2px ${props => props.theme.gray};
+  }
+
+  .CheckboxIndicator {
+    color: ${props => props.theme["purple-900"]};
+  }
+
+  .Label {
+    color: ${props => props.theme.gray};
+    padding-left: 0.8rem;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+`;
+
+export const CheckboxGroup = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const DialogButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 1.2rem;
+
+  margin-top: 1.6rem;
 `;
 
 export const CloseButton = styled(Dialog.Close)`
@@ -56,7 +96,7 @@ export const CloseButton = styled(Dialog.Close)`
   color: ${props => props.theme.gray};
 `;
 
-export const CancelButton = styled(Dialog.Close)`
+export const ChangeButton = styled(Dialog.Close)`
   font-size: 1.6rem;
 
   padding: 1.6rem 3.2rem;
@@ -77,23 +117,3 @@ export const CancelButton = styled(Dialog.Close)`
   }
 `;
 
-export const DeleteButton = styled.button`
-  font-size: 1.6rem;
-
-  padding: 1.6rem 3.2rem;
-
-  border: 0;
-  border-radius: 6px;
-
-  cursor: pointer;
-
-  color: ${props => props.theme.white};
-  background: linear-gradient(to right, rgb(230, 40, 40) 50%, rgb(193, 28, 28) 50%);
-  background-size: 200% 100%;
-  background-position: 0;
-  transition: background-position 0.2s ease-out;
-
-  &:hover {
-    background-position: -100% 0;
-  }
-`;
