@@ -26,24 +26,23 @@ export function AdminRoles() {
   const decodedToken = jwtDecode<TokenPayload>(token!);
   const adminEmail = decodedToken.sub;
 
-  useEffect(() => {
-    const getArrayOfCompanyMembers = async () => {
-      try {
-        const response = await apiGateway.get(`/v1/api/company/${companyId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  async function getArrayOfCompanyMembers() {
+    try {
+      const response = await apiGateway.get(`/v1/api/company/${companyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        setMembers(response.data.members);
-        
-      } catch (error) {
-        console.log("Error fetching company members: ", error);
-      }
-    };
+      setMembers(response.data.members);
+      
+    } catch (error) {
+      console.log("Error fetching company members: ", error);
+    }
+  }
 
-    getArrayOfCompanyMembers();
-  }, [companyId, token]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { getArrayOfCompanyMembers(); }, [companyId, token]);
 
   return(
     <LayoutContainer>
@@ -72,7 +71,12 @@ export function AdminRoles() {
                       </EditPermissionsButtonContainer>
                     </Dialog.Trigger>
 
-                    <ChangeEmployeesPermissionsModal />
+                    <ChangeEmployeesPermissionsModal 
+                      companyId={companyId}
+                      empolyeeEmail={member.username}
+                      currentPermissions={member.permissions}
+                      onPermissionsChanged={() => getArrayOfCompanyMembers()}
+                    />
                   </Dialog.Root>
                 </td>
               </tr>
