@@ -36,16 +36,43 @@ interface ApiResponse {
   members: Member[];
 }
 
+interface Document {
+  documentId: string;
+  documentName: string;
+  description: string;
+  category: string;
+}
+
 export function Group() {
   const navigate = useNavigate();
   const location = useLocation();
   const companyId = location.state?.companyId;
   const { token } = useAuth();
   const [userPermissions, setUserPermissions] = useState<string[]>([]);
+  const [documents, setDocuments] = useState<Document[]>([]);
   
   const decodedToken = jwtDecode<TokenPayload>(token!);
   const userEmail = decodedToken.sub;
  
+  useEffect(() => {
+    const getDocuments = async () => {
+      try {
+        const response = await apiGateway.get(`/v1/api/metadata/${companyId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setDocuments(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log("Error fetching documents: ", error);
+      }
+    };
+
+    getDocuments();
+  }, [token, companyId]);
+
   useEffect(() => {
     const getUserPermissions = async () => {
       try {
@@ -73,12 +100,17 @@ export function Group() {
   const hasSeeMembersRequestsPermission = userPermissions.includes("MANAGE_USERS");
   const hasHandleMembersPermissionsPermission = userPermissions.includes("GRANT_PERMISSIONS");
 
-  function handleTableGroupClick() {
-    navigate("/document/details");
+  function handleTableGroupClick(documentId: string) {
+    navigate("/document/details", { 
+      state: { 
+        companyId,
+        documentId
+      } 
+    });
   }
 
   function handleUploadDocumentButtonClick() {
-    navigate("/document/upload");
+    navigate("/document/upload", { state: { companyId }});
   }
 
   function handleSeeMembersRequestsButtonClick() {
@@ -112,74 +144,28 @@ export function Group() {
       </SearchFormAndButtonContainer>
 
         <GroupsTable>
-          <tbody onClick={handleTableGroupClick}>
-            <tr>
-              <td>Document 1.pdf</td>
-              <td className="textPreview">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam corporis atque quae, veritatis error doloribus molestiae suscipit fuga rerum ipsa impedit blanditiis laborum voluptatum dolorum quaerat quasi esse libero itaque.</td>
-              <td>
-                <Tag text="Category"/>
-              </td>
-              <td onClick={handleTrashClick}>
-                <Dialog.Root>
-                  <Dialog.Trigger asChild>
-                    <Trash size={24}/>
-                  </Dialog.Trigger>
-
-                  <UploadDocumentModal />
-                </Dialog.Root>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Document 2.pdf</td>
-              <td className="textPreview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, deleniti numquam nihil ipsam aut impedit temporibus provident obcaecati dicta autem totam fugit voluptatibus dolores, expedita ullam vitae odio necessitatibus? Maxime.</td>
-              <td>
-                <Tag text="Category"/>
-              </td>
-              <td onClick={handleTrashClick}>
-                <Dialog.Root>
+          <tbody>
+            {documents.map((document) => (
+              <tr 
+                key={document.documentId}
+                onClick={() => handleTableGroupClick(document.documentId)}
+              >
+                <td>{document.documentName}</td>
+                <td className="textPreview">{document.description}</td>
+                <td>
+                  <Tag text={document.category || "No category"}/>
+                </td>
+                <td onClick={handleTrashClick}>
+                  <Dialog.Root>
                     <Dialog.Trigger asChild>
                       <Trash size={24}/>
                     </Dialog.Trigger>
-
+                    
                     <UploadDocumentModal />
-                  </Dialog.Root>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Document 3.pdf</td>
-              <td className="textPreview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem ut nobis sit maiores id numquam facilis consequatur iure at nisi praesentium, enim ipsa quidem, quos similique in dolores distinctio reprehenderit.</td>
-              <td>
-                <Tag text="Category"/>
-              </td>
-              <td onClick={handleTrashClick}>
-                <Dialog.Root>
-                    <Dialog.Trigger asChild>
-                      <Trash size={24}/>
-                    </Dialog.Trigger>
-
-                    <UploadDocumentModal />
-                  </Dialog.Root>
-              </td>
-            </tr>
-
-            <tr>
-              <td>Document 4.pdf</td>
-              <td className="textPreview">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis voluptate, nesciunt soluta, quas dolorum minima voluptatem laboriosam eius labore inventore ab magnam beatae quam nam illo magni repellendus maiores rerum.</td>
-              <td>
-                <Tag text="Category"/>
-              </td>
-              <td onClick={handleTrashClick}>
-                <Dialog.Root>
-                  <Dialog.Trigger asChild>
-                    <Trash size={24}/>
-                  </Dialog.Trigger>
-
-                  <UploadDocumentModal />
-                </Dialog.Root>
-              </td>           
-            </tr>
+                  </Dialog.Root> 
+                </td>
+              </tr>
+            ))}
           </tbody>
         </GroupsTable>
     </LayoutContainer>
