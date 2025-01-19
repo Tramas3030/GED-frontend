@@ -16,7 +16,7 @@ import {
 
 import { SearchForm } from "./components/SearchForm";
 import { Tag } from "./components/Tag";
-import { UploadDocumentModal } from "./components/UploadDocumentModal";
+import { DeleteDocumentModal } from "./components/DeleteDocumentModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { apiGateway } from "../../lib/axios";
 
@@ -50,6 +50,7 @@ export function Group() {
   const { token } = useAuth();
   const [userPermissions, setUserPermissions] = useState<string[]>([]);
   const [documents, setDocuments] = useState<Document[]>([]);
+  const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
   
   const decodedToken = jwtDecode<TokenPayload>(token!);
   const userEmail = decodedToken.sub;
@@ -64,7 +65,7 @@ export function Group() {
         });
 
         setDocuments(response.data);
-        console.log(response.data);
+        setFilteredDocuments(response.data);
       } catch (error) {
         console.log("Error fetching documents: ", error);
       }
@@ -100,6 +101,16 @@ export function Group() {
   const hasSeeMembersRequestsPermission = userPermissions.includes("MANAGE_USERS");
   const hasHandleMembersPermissionsPermission = userPermissions.includes("GRANT_PERMISSIONS");
 
+  function handleSearchChange(search: string) {
+    if(!search.trim()) {
+      setFilteredDocuments(documents);
+      return;
+    }
+
+    const filtered = documents.filter((document) => document.documentName.toLowerCase().includes(search.toLowerCase()));
+    setFilteredDocuments(filtered);
+  }
+
   function handleTableGroupClick(documentId: string) {
     navigate("/document/details", { 
       state: { 
@@ -128,7 +139,7 @@ export function Group() {
   return(
     <LayoutContainer>
       <SearchFormAndButtonContainer>
-        <SearchForm />
+        <SearchForm onSearch={handleSearchChange} />
 
         <ButtonsGroupContainer>
           {hasHandleMembersPermissionsPermission && (
@@ -145,7 +156,7 @@ export function Group() {
 
         <GroupsTable>
           <tbody>
-            {documents.map((document) => (
+            {filteredDocuments.map((document) => (
               <tr 
                 key={document.documentId}
                 onClick={() => handleTableGroupClick(document.documentId)}
@@ -161,7 +172,10 @@ export function Group() {
                       <Trash size={24}/>
                     </Dialog.Trigger>
                     
-                    <UploadDocumentModal />
+                    <DeleteDocumentModal 
+                      companyId={companyId}
+                      documentName={document.documentName}
+                    />
                   </Dialog.Root> 
                 </td>
               </tr>

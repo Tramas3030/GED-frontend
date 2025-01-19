@@ -24,13 +24,9 @@ export const Content = styled(Dialog.Content)`
   flex-direction: column;
   gap: 1.6rem;
 
-  p, span {
-    font-size: 1.6rem;
-  }
+  font-size: 1.6rem;
 
-  p {
-    color: ${props => props.theme.gray};
-  }
+  color: ${props => props.theme.gray};
 
   span {
     color: red;

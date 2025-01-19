@@ -38,7 +38,6 @@ export function Login() {
       });
 
       login(response.data);
-      console.log(response.data);
       navigate("/home");
     } catch (error) {
       console.log("Error during login: ", error);
