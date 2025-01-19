@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
 import { Tag } from "./components/Tag";
-import { Container, TagsContainer, UpdatedAndCreatedByContainer } from "./styles";
+import { Container, TagsContainer, TitleAndDownloadButtonContainer, UpdatedAndCreatedByContainer } from "./styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { apiGateway } from "../../lib/axios";
+import { DownloadSimple } from "phosphor-react";
 
 interface DocumentDetails {
   documentName: string;
@@ -51,9 +52,40 @@ export function DocumentDetails() {
     getDocumentDetails();
   }, [token, documentId, companyId]);
 
+  async function handleDownloadDocument() {
+    try {
+      const response = await apiGateway.get("/v1/api/documents/download", {
+        params: {
+          companyId: companyId,
+          documentName: documentDetails?.documentName
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", documentDetails?.documentName || "document.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.log("Error downloading document: ", error);
+    }
+  }
+
   return(
     <Container>
-      <h1>{documentDetails?.documentName}</h1>
+      <TitleAndDownloadButtonContainer>
+        <h1>{documentDetails?.documentName}</h1>
+        <DownloadSimple size={24} onClick={handleDownloadDocument} />
+      </TitleAndDownloadButtonContainer>
       <p>{documentDetails?.description}</p>
       
       <UpdatedAndCreatedByContainer>

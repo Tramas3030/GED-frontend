@@ -13,6 +13,17 @@ export const Container = styled.div`
   background-color: ${props => props.theme["purple-900"]};
 `;
 
+export const TitleAndDownloadButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
 export const UpdatedAndCreatedByContainer = styled.div`
   width: 100%;
   display: flex;
