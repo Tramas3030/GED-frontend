@@ -9,6 +9,7 @@ import { User, LockSimple } from "phosphor-react";
 import { MediumButton } from "../../components/MediumButton"
 import { Container, FormContainer } from "./styles"
 import { FormInput } from "../../components/FormInput";
+import { Link } from "react-router-dom";
 
 const formValidationSchema = zod.object({
   username: zod.string().min(3, "Username must be at least 3 characters long"),
@@ -67,6 +68,8 @@ export function Register() {
 
         <MediumButton text="Register"/>
       </FormContainer>
+
+      <span>Already have an account? <Link to="/">Sign in</Link> </span>
     </Container>
   )
 }

@@ -13,11 +13,16 @@ export const ProfileContainer = styled.div`
   span {
     font-size: 1.6rem;
   }
+`;
 
-  img {
-    width: 50px;
-    height: 50px;
+export const AvatarContainer = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: ${props => props.theme.gray};
+  color: ${props => props.theme["purple-900"]};
 
-    border-radius: 50%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

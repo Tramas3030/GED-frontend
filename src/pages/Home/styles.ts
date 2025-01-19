@@ -52,3 +52,26 @@ export const GroupsTable = styled.table`
     background-color: ${props => props.theme["purple-900"]};
   }
 `;
+
+export const LoadingContainer = styled.div`
+  width: 60rem;
+  height: 30rem;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  display: flex;
+  gap: 1.6rem;
+  
+  text-align: center;
+  justify-content: center;
+
+  color: ${props => props.theme.gray};
+
+  p {
+    font-size: 2.4rem;
+    color: ${props => props.theme.gray};
+  }
+`;

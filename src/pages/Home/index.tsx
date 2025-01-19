@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { EmptyHomeContainer, LayoutContainer, GroupsTable} from "./styles";
+import { EmptyHomeContainer, LayoutContainer, GroupsTable, LoadingContainer} from "./styles";
 import { apiGateway } from "../../lib/axios";
 import { useAuth } from "../../contexts/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "phosphor-react";
 
 interface Company {
   id: string;
@@ -17,12 +18,14 @@ interface TokenPayload {
 
 export function Home() {
   const { token } = useAuth();
-  const [companies, setCompanies] = useState<Company[]>([]);
   const navigate = useNavigate();
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCompanies = async () => {
       try {
+        setLoading(true);
         const decodedToken  = jwtDecode<TokenPayload>(token!);
         const email = decodedToken.sub;
 
@@ -35,6 +38,8 @@ export function Home() {
         setCompanies(response.data);
       } catch (error) {
         console.log("Error fetching companies: ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -47,26 +52,31 @@ export function Home() {
 
   return(
     <LayoutContainer>
-      {companies.length === 0 ? (
-        <EmptyHomeContainer>
-          <strong>You don't belong to any group yet</strong>
-          <p>To get started, you can join an existing group or create your own.</p>
-        </EmptyHomeContainer>
+      {loading ? (
+        <LoadingContainer>
+          <Spinner size={24}/>
+          <p>Loading...</p>
+        </LoadingContainer>
       ) : (
-        <GroupsTable>
-          <tbody>
-            {companies.map((company) => (
-              <tr 
-                key={company.id}
-                onClick={() => handleGroupClick(company.id)}
-              >
-                <td>{company.name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </GroupsTable>
-      )}
-
+        companies.length === 0 ? (
+          <EmptyHomeContainer>
+            <strong>You don't belong to any group yet</strong>
+            <p>To get started, you can join an existing group or create your own.</p>
+          </EmptyHomeContainer>
+        ) : (
+          <GroupsTable>
+            <tbody>
+              {companies.map((company) => (
+                <tr 
+                  key={company.id}
+                  onClick={() => handleGroupClick(company.id)}
+                >
+                  <td>{company.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </GroupsTable>
+        ))}
     </LayoutContainer>
-  )
+  );
 }
